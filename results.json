@@ -1,0 +1,257 @@
+{
+  "metadata": {
+    "timestamp": "2026-04-06T03:03:37.644410+00:00",
+    "dry_run": false,
+    "models": {
+      "haiku-4.5": "claude-haiku-4-5",
+      "sonnet-4.6": "claude-sonnet-4-6",
+      "opus-4.6": "claude-opus-4-6"
+    },
+    "pricing": {
+      "haiku-4.5": {
+        "input_per_mtok": 1.0,
+        "output_per_mtok": 5.0
+      },
+      "sonnet-4.6": {
+        "input_per_mtok": 3.0,
+        "output_per_mtok": 15.0
+      },
+      "opus-4.6": {
+        "input_per_mtok": 5.0,
+        "output_per_mtok": 25.0
+      }
+    }
+  },
+  "tasks": {
+    "classification": {
+      "haiku-4.5": {
+        "input_tokens": 34,
+        "output_tokens": 5,
+        "cost_usd": 5.9e-05,
+        "latency_s": 2.72,
+        "response_preview": "Positive"
+      },
+      "sonnet-4.6": {
+        "input_tokens": 34,
+        "output_tokens": 5,
+        "cost_usd": 0.00017700000000000002,
+        "latency_s": 1.2,
+        "response_preview": "Positive"
+      },
+      "opus-4.6": {
+        "input_tokens": 34,
+        "output_tokens": 5,
+        "cost_usd": 0.000295,
+        "latency_s": 1.8,
+        "response_preview": "Positive"
+      }
+    },
+    "entity_extraction": {
+      "haiku-4.5": {
+        "input_tokens": 36,
+        "output_tokens": 39,
+        "cost_usd": 0.000231,
+        "latency_s": 0.76,
+        "response_preview": "```json\n{\n  \"name\": \"Sarah Chen\",\n  \"role\": \"CTO\",\n  \"company\": \"DataFlow Inc.\"\n}\n```"
+      },
+      "sonnet-4.6": {
+        "input_tokens": 36,
+        "output_tokens": 39,
+        "cost_usd": 0.000693,
+        "latency_s": 0.99,
+        "response_preview": "```json\n{\n  \"name\": \"Sarah Chen\",\n  \"role\": \"CTO\",\n  \"company\": \"DataFlow Inc.\"\n}\n```"
+      },
+      "opus-4.6": {
+        "input_tokens": 36,
+        "output_tokens": 39,
+        "cost_usd": 0.001155,
+        "latency_s": 1.95,
+        "response_preview": "```json\n{\n  \"name\": \"Sarah Chen\",\n  \"role\": \"CTO\",\n  \"company\": \"DataFlow Inc.\"\n}\n```"
+      }
+    },
+    "summarization": {
+      "haiku-4.5": {
+        "input_tokens": 172,
+        "output_tokens": 40,
+        "cost_usd": 0.00037200000000000004,
+        "latency_s": 1.57,
+        "response_preview": "Cloud computing has revolutionized business operations by offering cost-effective, scalable access t"
+      },
+      "sonnet-4.6": {
+        "input_tokens": 172,
+        "output_tokens": 64,
+        "cost_usd": 0.0014759999999999999,
+        "latency_s": 2.57,
+        "response_preview": "Cloud computing has revolutionized business operations by offering scalable, cost-efficient on-deman"
+      },
+      "opus-4.6": {
+        "input_tokens": 172,
+        "output_tokens": 64,
+        "cost_usd": 0.00246,
+        "latency_s": 3.0,
+        "response_preview": "Cloud computing has revolutionized business operations by offering scalable, cost-efficient on-deman"
+      }
+    },
+    "qa_simple": {
+      "haiku-4.5": {
+        "input_tokens": 19,
+        "output_tokens": 4,
+        "cost_usd": 3.9e-05,
+        "latency_s": 0.71,
+        "response_preview": "Tokyo"
+      },
+      "sonnet-4.6": {
+        "input_tokens": 19,
+        "output_tokens": 4,
+        "cost_usd": 0.000117,
+        "latency_s": 0.92,
+        "response_preview": "Tokyo"
+      },
+      "opus-4.6": {
+        "input_tokens": 19,
+        "output_tokens": 4,
+        "cost_usd": 0.000195,
+        "latency_s": 1.94,
+        "response_preview": "Tokyo"
+      }
+    },
+    "qa_complex": {
+      "haiku-4.5": {
+        "input_tokens": 39,
+        "output_tokens": 99,
+        "cost_usd": 0.000534,
+        "latency_s": 1.36,
+        "response_preview": "# Step-by-step solution\n\n**Initial number of sheep:** 17\n\n**\"All but 9 die\"** means that 9 sheep sur"
+      },
+      "sonnet-4.6": {
+        "input_tokens": 39,
+        "output_tokens": 75,
+        "cost_usd": 0.0012419999999999998,
+        "latency_s": 2.26,
+        "response_preview": "## Step-by-step thinking:\n\nThe key phrase here is **\"all but 9 die.\"**\n\n- \"All but 9\" means **all EX"
+      },
+      "opus-4.6": {
+        "input_tokens": 39,
+        "output_tokens": 90,
+        "cost_usd": 0.002445,
+        "latency_s": 3.4,
+        "response_preview": "# Solving the Sheep Problem\n\nLet me break this down step by step.\n\n1. The farmer starts with **17 sh"
+      }
+    },
+    "code_gen_simple": {
+      "haiku-4.5": {
+        "input_tokens": 28,
+        "output_tokens": 83,
+        "cost_usd": 0.000443,
+        "latency_s": 1.57,
+        "response_preview": "```python\ndef fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    \n "
+      },
+      "sonnet-4.6": {
+        "input_tokens": 28,
+        "output_tokens": 79,
+        "cost_usd": 0.001269,
+        "latency_s": 1.97,
+        "response_preview": "```python\ndef fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    a,"
+      },
+      "opus-4.6": {
+        "input_tokens": 28,
+        "output_tokens": 79,
+        "cost_usd": 0.0021149999999999997,
+        "latency_s": 2.72,
+        "response_preview": "```python\ndef fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    a,"
+      }
+    },
+    "code_review": {
+      "haiku-4.5": {
+        "input_tokens": 181,
+        "output_tokens": 256,
+        "cost_usd": 0.0014609999999999998,
+        "latency_s": 1.86,
+        "response_preview": "# Code Review: Bugs and Fixes\n\n## Bug 1: `merge_sorted()` - Missing remaining elements\n\n**Issue:** A"
+      },
+      "sonnet-4.6": {
+        "input_tokens": 181,
+        "output_tokens": 256,
+        "cost_usd": 0.004383,
+        "latency_s": 4.01,
+        "response_preview": "## Code Review and Bug Fixes\n\n### Bug 1: `merge_sorted` \u2014 Remaining Elements Not Appended\n\n**Problem"
+      },
+      "opus-4.6": {
+        "input_tokens": 181,
+        "output_tokens": 256,
+        "cost_usd": 0.007304999999999999,
+        "latency_s": 4.8,
+        "response_preview": "# Code Review: Bug Fixes\n\n## Bug 1: `merge_sorted` \u2014 Remaining elements not appended\n\n**Problem:** W"
+      }
+    },
+    "creative_writing": {
+      "haiku-4.5": {
+        "input_tokens": 15,
+        "output_tokens": 27,
+        "cost_usd": 0.00015000000000000001,
+        "latency_s": 1.02,
+        "response_preview": "# Debugging\n\nCode breaks in the night,\nOne semicolon missing\u2014\nNow the dawn can come."
+      },
+      "sonnet-4.6": {
+        "input_tokens": 15,
+        "output_tokens": 60,
+        "cost_usd": 0.000945,
+        "latency_s": 1.99,
+        "response_preview": "Here's a haiku about software debugging:\n\n*Staring at the screen*\n*One missing semicolon hides*\n*Hou"
+      },
+      "opus-4.6": {
+        "input_tokens": 15,
+        "output_tokens": 31,
+        "cost_usd": 0.0008500000000000001,
+        "latency_s": 2.29,
+        "response_preview": "*Bugs hide in the code*\n*Tracing logic line by line*\n*Found it\u2014missing semicolon*"
+      }
+    },
+    "data_analysis": {
+      "haiku-4.5": {
+        "input_tokens": 61,
+        "output_tokens": 256,
+        "cost_usd": 0.001341,
+        "latency_s": 3.38,
+        "response_preview": "# Key Trends Observed\n\n## Overall Growth\n- **Strong upward trajectory**: Revenue grows from $12,000 "
+      },
+      "sonnet-4.6": {
+        "input_tokens": 61,
+        "output_tokens": 256,
+        "cost_usd": 0.004023,
+        "latency_s": 5.56,
+        "response_preview": "## Key Trends Analysis\n\n### \ud83d\udcc8 Overall Growth\nBoth **revenue and users show a strong upward trend** f"
+      },
+      "opus-4.6": {
+        "input_tokens": 61,
+        "output_tokens": 256,
+        "cost_usd": 0.006704999999999999,
+        "latency_s": 6.62,
+        "response_preview": "## Key Trends Observed\n\n### 1. **Overall Revenue Growth**\nRevenue shows a strong **upward trend**, g"
+      }
+    },
+    "chat_reply": {
+      "haiku-4.5": {
+        "input_tokens": 13,
+        "output_tokens": 32,
+        "cost_usd": 0.00017299999999999998,
+        "latency_s": 5.11,
+        "response_preview": "I'm doing well, thanks for asking! I'm here and ready to help with whatever you need. How are *you* "
+      },
+      "sonnet-4.6": {
+        "input_tokens": 13,
+        "output_tokens": 43,
+        "cost_usd": 0.000684,
+        "latency_s": 1.9,
+        "response_preview": "I'm doing well, thanks for asking! I'm ready to help with whatever you have in mind - questions, con"
+      },
+      "opus-4.6": {
+        "input_tokens": 13,
+        "output_tokens": 40,
+        "cost_usd": 0.001065,
+        "latency_s": 1.96,
+        "response_preview": "I'm doing well, thanks for asking! I'm here and ready to help if you have any questions or just want"
+      }
+    }
+  }
+}

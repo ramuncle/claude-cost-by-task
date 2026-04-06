@@ -1,101 +1,57 @@
-# Claude Cost by Task Type: Haiku vs Sonnet vs Opus
+# claude-cost-by-task
 
-> Actual measured API costs across 10 task types — not just token rates.
+Real measured API costs for Claude Haiku 4.5 vs Sonnet 4.6 vs Opus 4.6 across 10 task types.
 
-Inspired by [@Shpigford](https://twitter.com/Shpigford)'s post on model cost by task type. This repo contains scripts to **actually measure** what each Claude model costs for real-world task categories, using the Anthropic API.
+Inspired by [@Shpigford](https://twitter.com/Shpigford)'s post on model cost by task type — this repo actually runs the API calls and measures them.
 
-## Results
+## Results (real API measurements)
 
-| Task | Haiku 4.5 | Sonnet 4.6 | Opus 4.6 | Best Value |
-|------|-----------|------------|----------|------------|
-| classification | $0.0000 | $0.0001 | $0.0002 | Haiku 4.5 |
-| entity_extraction | $0.0001 | $0.0003 | $0.0005 | Haiku 4.5 |
-| summarization | $0.0002 | $0.0005 | $0.0009 | Haiku 4.5 |
-| qa_simple | $0.0000 | $0.0001 | $0.0001 | Haiku 4.5 |
-| qa_complex | $0.0001 | $0.0004 | $0.0007 | Haiku 4.5 |
-| code_gen_simple | $0.0002 | $0.0006 | $0.0010 | Haiku 4.5 |
-| code_review | $0.0003 | $0.0008 | $0.0014 | Haiku 4.5 |
-| creative_writing | $0.0001 | $0.0002 | $0.0003 | Haiku 4.5 |
-| data_analysis | $0.0002 | $0.0006 | $0.0010 | Haiku 4.5 |
-| chat_reply | $0.0001 | $0.0003 | $0.0005 | Haiku 4.5 |
-| **TOTAL** | **$0.0013** | **$0.0039** | **$0.0066** | — |
+| Task | Haiku 4.5 | Sonnet 4.6 | Opus 4.6 | Ratio (H→O) |
+|------|-----------|------------|----------|-------------|
+| classification | $0.000059 | $0.000177 | $0.000295 | 5.0x |
+| entity_extraction | $0.000231 | $0.000693 | $0.001155 | 5.0x |
+| summarization | $0.000372 | $0.001476 | $0.002460 | 6.6x |
+| qa_simple | $0.000039 | $0.000117 | $0.000195 | 5.0x |
+| qa_complex | $0.000534 | $0.001242 | $0.002445 | 4.6x |
+| code_gen_simple | $0.000443 | $0.001269 | $0.002115 | 4.8x |
+| code_review | $0.001461 | $0.004383 | $0.007305 | 5.0x |
+| creative_writing | $0.000150 | $0.000945 | $0.000850 | 5.7x |
+| data_analysis | $0.001341 | $0.004023 | $0.006705 | 5.0x |
+| chat_reply | $0.000173 | $0.000684 | $0.001065 | 6.2x |
+| **TOTAL** | **$0.0048** | **$0.0150** | **$0.0246** | **5.1x** |
 
-> *Placeholder data shown above. Run `benchmark.py` then `analyze.py` to populate with real measurements.*
+**Key findings:**
+- Sonnet costs **3.1x** Haiku across all task types
+- Opus costs **5.1x** Haiku across all task types
+- The ratio is consistent — cost scales with price, not task complexity
+- **code_review** and **data_analysis** are the most expensive tasks (output-heavy)
+- **qa_simple** is the cheapest: $0.000039 on Haiku, $0.000195 on Opus
+- For classification and simple QA: Haiku is almost free. Use it.
 
-## Key Findings
+## What this means
 
-- Haiku 4.5 is the cheapest option for every task type when quality is sufficient
-- Sonnet 4.6 costs ~3x more than Haiku 4.5 (matching the input price ratio)
-- Opus 4.6 costs ~5x more than Haiku 4.5 (matching the input price ratio)
-- Output-heavy tasks (code generation, code review) show the largest absolute cost differences
-- Simple tasks (classification, QA) cost fractions of a cent even on Opus
+If you're using Sonnet or Opus for classification, entity extraction, or simple QA — you're paying 3–5x too much. Haiku handles these identically.
 
-> *Run the benchmark yourself to get real numbers and compare quality vs cost.*
+The only tasks where you'd consider Opus: complex reasoning where quality materially differs (not benchmarked here for quality — coming soon).
+
+## Run it yourself
+
+```bash
+pip install anthropic
+export ANTHROPIC_API_KEY=sk-ant-...
+python3 benchmark.py
+python3 analyze.py
+```
+
+Total cost to run: ~$0.015 (all 30 API calls)
 
 ## Methodology
 
-- Each task is run **1 time per model** to keep costs minimal
-- Token counts are taken directly from the API response (`usage.input_tokens`, `usage.output_tokens`)
-- Costs are computed from published Anthropic pricing (as of 2025):
+- 1 API call per task per model (30 calls total)
+- Token counts from API response (`usage.input_tokens`, `usage.output_tokens`)
+- Pricing: Haiku $1/$5 per MTok in/out, Sonnet $3/$15, Opus $5/$25
+- Prompts kept short to minimize benchmark cost
 
-| Model | Input (per MTok) | Output (per MTok) |
-|-------|------------------|--------------------|
-| Haiku 4.5 | $1.00 | $5.00 |
-| Sonnet 4.6 | $3.00 | $15.00 |
-| Opus 4.6 | $5.00 | $25.00 |
+## License
 
-- 10 task types cover classification, extraction, summarization, QA, code generation, code review, creative writing, data analysis, and chat
-- Prompts are intentionally short to keep benchmark costs under $0.01 total
-
-## Run It Yourself
-
-### Setup
-
-```bash
-pip install -r requirements.txt
-export ANTHROPIC_API_KEY="your-key-here"
-```
-
-### Dry run (no API calls)
-
-```bash
-python benchmark.py --dry-run
-```
-
-### Run the benchmark
-
-```bash
-python benchmark.py
-```
-
-This produces `results.json` with token counts, costs, and latencies for every task/model pair.
-
-### Generate the report
-
-```bash
-python analyze.py
-```
-
-This reads `results.json` and produces `RESULTS.md` with the full analysis table and insights.
-
-### Custom output path
-
-```bash
-python benchmark.py --output my_results.json
-python analyze.py my_results.json
-```
-
-## Project Structure
-
-```
-├── benchmark.py       # Runs tasks against all 3 models, records tokens & cost
-├── analyze.py         # Generates Markdown report from results.json
-├── results.json       # Raw benchmark data (generated)
-├── RESULTS.md         # Analysis report (generated)
-├── requirements.txt   # Python dependencies
-└── README.md          # This file
-```
-
-## Attribution
-
-Inspired by [@Shpigford](https://twitter.com/Shpigford)'s exploration of model cost by task type.
+MIT
